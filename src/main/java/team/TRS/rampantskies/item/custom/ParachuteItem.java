@@ -19,12 +19,12 @@ public class ParachuteItem extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ISACTIVATED = ISACTIVATED ? false : true;
 
-        if (ISACTIVATED) {
-            player.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 10, 3));
-        } else {
-            player.removeEffect(MobEffects.SLOW_FALLING);
+        if (!player.isOnGround()) {
+            player.setNoGravity(false);
+        }
+        if (player.isOnGround()){
+
         }
 
 

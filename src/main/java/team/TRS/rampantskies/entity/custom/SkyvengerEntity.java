@@ -2,13 +2,18 @@ package team.TRS.rampantskies.entity.custom;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.FlyingMob;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.animal.FlyingAnimal;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.checkerframework.checker.units.qual.A;
@@ -22,10 +27,10 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.core.manager.SingletonAnimationFactory;
 
-public class SkyvengerEntity extends Monster implements IAnimatable {
+public class SkyvengerEntity extends FlyingMob implements IAnimatable, FlyingAnimal {
     private AnimationFactory factory = new SingletonAnimationFactory(this);
 
-    public SkyvengerEntity(EntityType<? extends Monster> pEntityType, Level pLevel) {
+    public SkyvengerEntity(EntityType<? extends FlyingMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -33,8 +38,8 @@ public class SkyvengerEntity extends Monster implements IAnimatable {
         return Monster.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 100.0f)
                 .add(Attributes.ATTACK_DAMAGE, 5f)
-                .add(Attributes.ATTACK_SPEED, 1f)
-                .add(Attributes.MOVEMENT_SPEED, 1f)
+                .add(Attributes.ATTACK_SPEED, 30f)
+                .add(Attributes.MOVEMENT_SPEED, 0.21f)
                 .build();
     }
 
@@ -61,9 +66,17 @@ public class SkyvengerEntity extends Monster implements IAnimatable {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
+    }
+
+    class flyBackUp {
+
+    }
+
+    @Override
+    public boolean isFlying() {
+        return true;
     }
 }

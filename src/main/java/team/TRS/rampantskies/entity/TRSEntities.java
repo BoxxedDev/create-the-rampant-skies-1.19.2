@@ -15,7 +15,7 @@ public class TRSEntities {
 
     public static final RegistryObject<EntityType<SkyvengerEntity>> SKYVENGER = ENTITY_TYPES.register("skyvenger"
     ,() -> EntityType.Builder.of(SkyvengerEntity::new, MobCategory.MONSTER)
-                    .sized(2f, 1.5f)
+                    .sized(2f, 1.2f)
                     .build(String.valueOf(new ResourceLocation(RampantSkiesMod.MODID, "skyvenger"))));
 
     public static void register(IEventBus eventBus) {

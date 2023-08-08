@@ -1,7 +1,10 @@
 package team.TRS.rampantskies.block;
 
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.Create;
+import com.simibubi.create.content.contraptions.bearing.BlankSailBlockItem;
+import com.simibubi.create.content.contraptions.bearing.SailBlock;
 import com.simibubi.create.content.decoration.encasing.EncasedBlock;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
@@ -22,6 +25,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -43,6 +47,7 @@ import team.TRS.rampantskies.item.TRSItems;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
+import static com.simibubi.create.foundation.data.TagGen.axeOnly;
 import static team.TRS.rampantskies.RampantSkiesMod.REGISTRATE;
 
 public class TRSBlocks {
@@ -80,6 +85,18 @@ public class TRSBlocks {
             .register();
 
     public static final RegistryEntry<Block> LEVITHINE_BLOCK = REGISTRATE.block("levithine_block", Block::new)
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<SailBlock> LEVIATHAN_SAIL = REGISTRATE.block("leviathan_sail", p -> SailBlock.withCanvas(p, DyeColor.GRAY))
+            .initialProperties(SharedProperties::wooden)
+            .properties(p -> p.color(MaterialColor.DIRT))
+            .properties(p -> p.sound(SoundType.SCAFFOLDING)
+                    .noOcclusion())
+            .transform(axeOnly())
+            .blockstate(BlockStateGen.directionalBlockProvider(false))
+            .tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
+            .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
             .simpleItem()
             .register();
 
