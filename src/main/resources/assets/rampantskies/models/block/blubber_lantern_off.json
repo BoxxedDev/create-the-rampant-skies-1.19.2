@@ -1,0 +1,13 @@
+{
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"down": "rampantskies:block/blubber_lantern_bottom",
+		"east": "rampantskies:block/blubber_lantern_side_off",
+		"north": "rampantskies:block/blubber_lantern_side_off",
+		"particle": "rampantskies:block/blubber_lantern_side_off",
+		"south": "rampantskies:block/blubber_lantern_side_off",
+		"up": "rampantskies:block/blubber_lantern_top",
+		"west": "rampantskies:block/blubber_lantern_side_off"
+	}
+}
+

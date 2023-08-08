@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "rampantskies:block/rum_barrel",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "rampantskies:block/rum_barrel"
+    },
+    "facing=south": {
+      "model": "rampantskies:block/rum_barrel",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "rampantskies:block/rum_barrel",
+      "y": 270
+    }
+  }
+}

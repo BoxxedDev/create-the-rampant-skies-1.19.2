@@ -1,0 +1,14 @@
+{
+  "item.rampantskies.rum_bottle": "Bottle o' Rum",
+  "item.rampantskies.razor_fang": "Razor Fang",
+  "item.rampantskies.leviathan_blubber": "Leviathan Blubber",
+  "item.rampantskies.flying_sack": "Flying Sack",
+  "item.rampantskies.parachute": "Parachute",
+  "item.rampantskies.tough_hide": "Tough Hide",
+
+  "block.rampantskies.rum_barrel": "Barrel o' Rum",
+  "block.rampantskies.blubber_lantern": "Blubber Lantern",
+  "block.rampantskies.levithine_block": "Block of Levithine",
+
+  "itemGroup.trs_tab": "The Rampant Skies"
+}

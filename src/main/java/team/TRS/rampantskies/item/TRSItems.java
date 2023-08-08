@@ -1,16 +1,41 @@
 package team.TRS.rampantskies.item;
 
+import com.simibubi.create.AllItems;
+import com.tterrag.registrate.Registrate;
+import com.tterrag.registrate.builders.ItemBuilder;
+import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import team.TRS.rampantskies.RampantSkiesMod;
+import team.TRS.rampantskies.item.custom.ParachuteItem;
+import team.TRS.rampantskies.item.custom.RumBottleItem;
+import static team.TRS.rampantskies.RampantSkiesMod.REGISTRATE;
 
 public class TRSItems {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, RampantSkiesMod.MODID);
-
-    public static void register(IEventBus eventBus) {
-        ITEMS.register(eventBus);
+    static {
+        REGISTRATE.creativeModeTab(() -> CreativeTabs.TRS_TAB);
     }
+
+    public static final ItemEntry<RumBottleItem> RUM_BOTTLE = REGISTRATE.item("rum_bottle", RumBottleItem::new)
+            .properties(p -> p.stacksTo(1))
+            .register();
+    public static final ItemEntry<Item> RAZOR_FANG = REGISTRATE.item("razor_fang", Item::new)
+            .register();
+    public static final ItemEntry<Item> LEVIATHAN_BLUBBER = REGISTRATE.item("leviathan_blubber", Item::new)
+            .register();
+    public static final ItemEntry<Item> FLYING_SACK = REGISTRATE.item("flying_sack", Item::new)
+            .register();
+    public static final ItemEntry<ParachuteItem> PARACHUTE = REGISTRATE.item("parachute", ParachuteItem::new)
+            .register();
+    public static final ItemEntry<Item> TOUGH_HIDE = REGISTRATE.item("tough_hide", Item::new)
+            .register();
+
+    /*
+    public static final RegistryObject<Item> RAZOR_FANG = ITEMS.register("razor_fang",
+            () -> new Item(new Item.Properties().tab(CreativeTabs.TRS_TAB)));
+    public static final RegistryObject<Item> LEVIATHAN_BLUBBER = ITEMS.register("leviathan_blubber",
+            () -> new Item(new Item.Properties().tab(CreativeTabs.TRS_TAB)));
+    public static final RegistryObject<Item> FLYING_SACK = ITEMS.register("flying_sack",
+            () -> new Item(new Item.Properties().tab(CreativeTabs.TRS_TAB)));
+     */
+
+    public static void register() {}
 }
