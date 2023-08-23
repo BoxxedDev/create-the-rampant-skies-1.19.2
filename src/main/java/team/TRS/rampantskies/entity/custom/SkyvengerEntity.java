@@ -14,6 +14,7 @@ import net.minecraft.world.entity.animal.FlyingAnimal;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Phantom;
+import net.minecraft.world.entity.monster.Shulker;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.checkerframework.checker.units.qual.A;
@@ -29,6 +30,8 @@ import software.bernie.geckolib3.core.manager.SingletonAnimationFactory;
 
 public class SkyvengerEntity extends FlyingMob implements IAnimatable, FlyingAnimal {
     private AnimationFactory factory = new SingletonAnimationFactory(this);
+
+
 
     public SkyvengerEntity(EntityType<? extends FlyingMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);

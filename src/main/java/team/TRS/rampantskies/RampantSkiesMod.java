@@ -1,12 +1,9 @@
 package team.TRS.rampantskies;
 
-import com.simibubi.create.AllItems;
-import com.simibubi.create.Create;
-import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import com.mojang.logging.LogUtils;
-import com.tterrag.registrate.Registrate;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,8 +16,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 import team.TRS.rampantskies.block.TRSBlocks;
+import team.TRS.rampantskies.block.TRSBlockEntities;
 import team.TRS.rampantskies.entity.TRSEntities;
-import team.TRS.rampantskies.entity.client.SkyvengerRenderer;
+import team.TRS.rampantskies.entity.client.skyvenger.SkyvengerRenderer;
 import team.TRS.rampantskies.item.TRSItems;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -28,7 +26,7 @@ import team.TRS.rampantskies.item.TRSItems;
 public class RampantSkiesMod {
     public static final String MODID = "rampantskies";
     private static final Logger LOGGER = LogUtils.getLogger();
-    public static final Registrate REGISTRATE = Registrate.create(MODID);
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
 
     public RampantSkiesMod()
     {
@@ -37,10 +35,13 @@ public class RampantSkiesMod {
         TRSBlocks.register();
         TRSItems.register();
         TRSEntities.register(modEventBus);
+        TRSBlockEntities.register();
 
         GeckoLib.initialize();
 
         modEventBus.addListener(this::commonSetup);
+
+        REGISTRATE.registerEventListeners(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -65,6 +66,12 @@ public class RampantSkiesMod {
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(TRSEntities.SKYVENGER.get(), SkyvengerRenderer::new);
+
+            TRSPartialModels.init();
         }
+    }
+
+    public static ResourceLocation asResource(String path) {
+        return new ResourceLocation(MODID, path);
     }
 }

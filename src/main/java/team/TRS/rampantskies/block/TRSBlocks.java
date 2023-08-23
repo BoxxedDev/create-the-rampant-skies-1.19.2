@@ -1,53 +1,38 @@
 package team.TRS.rampantskies.block;
 
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
-import com.simibubi.create.content.contraptions.bearing.BlankSailBlockItem;
+import com.simibubi.create.*;
 import com.simibubi.create.content.contraptions.bearing.SailBlock;
-import com.simibubi.create.content.decoration.encasing.EncasedBlock;
+import com.simibubi.create.content.fluids.PipeAttachmentModel;
+import com.simibubi.create.content.fluids.pump.PumpBlock;
+import com.simibubi.create.content.fluids.pump.PumpRenderer;
 import com.simibubi.create.content.kinetics.BlockStressDefaults;
-import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
-import com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockModel;
-import com.simibubi.create.content.kinetics.simpleRelays.CogWheelBlock;
-import com.simibubi.create.content.kinetics.simpleRelays.CogwheelBlockItem;
-import com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedShaftBlock;
-import com.simibubi.create.content.redstone.RoseQuartzLampBlock;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
+import com.simibubi.create.foundation.render.AllInstanceFormats;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import cpw.mods.modlauncher.TestingLaunchHandlerService;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import team.TRS.rampantskies.RampantSkiesMod;
+import team.TRS.rampantskies.block.custom.AirIntakeBlock;
+import team.TRS.rampantskies.block.custom.CombustionChamberBlock;
+import team.TRS.rampantskies.block.custom.CreateDirectionalBlock;
 import team.TRS.rampantskies.block.custom.RumBarrel;
-import team.TRS.rampantskies.block.custom.TestKineticBlock;
 import team.TRS.rampantskies.item.CreativeTabs;
-import team.TRS.rampantskies.item.TRSItems;
 
-import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
+import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOnly;
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 import static team.TRS.rampantskies.RampantSkiesMod.REGISTRATE;
 
 public class TRSBlocks {
@@ -97,6 +82,33 @@ public class TRSBlocks {
             .blockstate(BlockStateGen.directionalBlockProvider(false))
             .tag(AllTags.AllBlockTags.WINDMILL_SAILS.tag)
             .tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<AirIntakeBlock> AIR_INTAKE = REGISTRATE.block("air_intake", AirIntakeBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(p -> p.noOcclusion().color(MaterialColor.STONE))
+            .addLayer(() -> RenderType::cutout)
+            .transform(pickaxeOnly())
+            .blockstate((ctx, prov) -> prov.horizontalBlock(ctx.getEntry(), prov.models()
+                    .getExistingFile(ctx.getId()), 0))
+            .transform(BlockStressDefaults.setImpact(4))
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<CombustionChamberBlock> GAS_COMBUSTION_CHAMBER = REGISTRATE.block("gas_combustion_chamber", CombustionChamberBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(p -> p.color(MaterialColor.STONE).noOcclusion())
+            .blockstate((ctx, prov) -> prov.horizontalBlock(ctx.getEntry(), prov.models()
+                    .getExistingFile(ctx.getId()), 0))
+            .simpleItem()
+            .register();
+
+    public static final BlockEntry<CreateDirectionalBlock> GAS_NOZZLE = REGISTRATE.block("gas_nozzle", CreateDirectionalBlock::new)
+            .initialProperties(SharedProperties::copperMetal)
+            .properties(p -> p.color(MaterialColor.STONE).noOcclusion())
+            .blockstate((ctx, prov) -> prov.horizontalBlock(ctx.getEntry(), prov.models()
+                    .getExistingFile(ctx.getId()), 0))
             .simpleItem()
             .register();
 

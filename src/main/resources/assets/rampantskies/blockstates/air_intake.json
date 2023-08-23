@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "rampantskies:block/air_intake/block",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "rampantskies:block/air_intake/block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "rampantskies:block/air_intake/block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "rampantskies:block/air_intake/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "rampantskies:block/air_intake/block"
+    },
+    "facing=west": {
+      "model": "rampantskies:block/air_intake/block",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

@@ -1,4 +1,4 @@
-package team.TRS.rampantskies.entity.client;
+package team.TRS.rampantskies.entity.client.skyvenger;
 
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
