@@ -30,7 +30,9 @@ public class RumBottleItem extends Item {
         }
 
         if (!p_41349_.isClientSide) {
-            p_41350_.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 3, true, false));
+            p_41350_.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0, true, false));
+            p_41350_.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3600, 0, true, false));
+            p_41350_.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 3600, 0, true, false));
         }
 
         if (p_41348_.isEmpty()) {
