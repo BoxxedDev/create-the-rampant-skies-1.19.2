@@ -10,6 +10,9 @@
   "block.rampantskies.blubber_lantern": "Blubber Lantern",
   "block.rampantskies.levithine_block": "Block of Levithine",
   "block.rampantskies.leviathan_sail": "Leviathan Sail",
+  "block.rampantskies.air_intake": "Air Intake",
+  "block.rampantskies.gas_combustion_chamber": "Gas Combustion Chamber",
+  "block.rampantskies.gas_nozzle": "Gas Nozzle",
 
   "itemGroup.trs_tab": "The Rampant Skies"
 }
