@@ -14,5 +14,17 @@
   "block.rampantskies.gas_combustion_chamber": "Gas Combustion Chamber",
   "block.rampantskies.gas_nozzle": "Gas Nozzle",
 
-  "itemGroup.trs_tab": "The Rampant Skies"
+  "itemGroup.trs_tab": "The Rampant Skies",
+
+  "create.gui.goggles.combustion_chamber.info": "Combustion Chamber Contents: ",
+  "create.gui.goggles.air_intake.air_flow": "Airflow: ",
+  "create.gui.goggles.gas_nozzle.thrust": "Thrust: ",
+  "create.gui.goggles.jet_engine.info": "Jet Engine Info: ",
+
+  "create.generic.unit.meters_per_second": "M/S",
+  "create.generic.unit.newton": "N",
+
+  "rampantskies.ponder.engine.text_1": "Engines are a good way to propulse your airship.",
+  "rampantskies.ponder.engine.text_2": "You can slow down",
+  "rampantskies.ponder.engine.text_3": "Or speed up the air intake speed to slow or speed the propulsion."
 }

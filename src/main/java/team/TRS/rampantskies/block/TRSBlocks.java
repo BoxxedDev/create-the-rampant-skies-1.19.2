@@ -22,10 +22,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MaterialColor;
-import team.TRS.rampantskies.block.custom.AirIntakeBlock;
-import team.TRS.rampantskies.block.custom.CombustionChamberBlock;
-import team.TRS.rampantskies.block.custom.CreateDirectionalBlock;
-import team.TRS.rampantskies.block.custom.RumBarrel;
+import team.TRS.rampantskies.block.custom.*;
 import team.TRS.rampantskies.item.CreativeTabs;
 
 import java.util.function.ToIntFunction;
@@ -104,13 +101,14 @@ public class TRSBlocks {
             .simpleItem()
             .register();
 
-    public static final BlockEntry<CreateDirectionalBlock> GAS_NOZZLE = REGISTRATE.block("gas_nozzle", CreateDirectionalBlock::new)
+    public static final BlockEntry<GasNozzleBlock> GAS_NOZZLE = REGISTRATE.block("gas_nozzle", GasNozzleBlock::new)
             .initialProperties(SharedProperties::copperMetal)
             .properties(p -> p.color(MaterialColor.STONE).noOcclusion())
             .blockstate((ctx, prov) -> prov.horizontalBlock(ctx.getEntry(), prov.models()
                     .getExistingFile(ctx.getId()), 0))
             .simpleItem()
             .register();
+
 
     public static void register() {}
 }

@@ -1,42 +1,38 @@
 package team.TRS.rampantskies.block.entity;
 
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.kinetics.base.IRotate;
-import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
-public class AirIntakeBlockEntity extends KineticBlockEntity {
-    float intake;
+public class GasNozzleBlockEntity extends BlockEntity implements IHaveGoggleInformation {
     float thrust;
+    float intake;
 
-    public AirIntakeBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
-        super(typeIn, pos, state);
+    public GasNozzleBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+        super(type, pos, blockState);
     }
+
+    //thrust related stuff
+    public float getThrust() {
+        return thrust;
+    }
+    public void setThrust(float newThrust) {
+        thrust = newThrust;
+    }
+
+    //gtt related stuff
+    public void setIntake(float newIntake){intake = newIntake;}
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        boolean added = false;
-
-        if (!IRotate.StressImpact.isEnabled())
-            return added;
-        float stressAtBase = calculateStressApplied();
-        if (Mth.equal(stressAtBase, 0))
-            return added;
-
-        Lang.translate("gui.goggles.kinetic_stats")
-                .forGoggles(tooltip);
-
-        addStressImpactStats(tooltip, stressAtBase);
-
         LangBuilder ms = Lang.translate("generic.unit.meters_per_second");
         LangBuilder n = Lang.translate("generic.unit.newton");
 
@@ -58,16 +54,6 @@ public class AirIntakeBlockEntity extends KineticBlockEntity {
                         .style(ChatFormatting.LIGHT_PURPLE))
                 .style(ChatFormatting.GRAY)
                 .forGoggles(tooltip, 1);
-
         return true;
-
     }
-
-
-    public void setThrust(float newThrust) {
-        thrust = newThrust;
-    }
-
-    //gtt related stuff
-    public void setIntake(float newIntake){intake = newIntake;}
 }

@@ -28,14 +28,5 @@ public class TRSItems {
     public static final ItemEntry<Item> TOUGH_HIDE = REGISTRATE.item("tough_hide", Item::new)
             .register();
 
-    /*
-    public static final RegistryObject<Item> RAZOR_FANG = ITEMS.register("razor_fang",
-            () -> new Item(new Item.Properties().tab(CreativeTabs.TRS_TAB)));
-    public static final RegistryObject<Item> LEVIATHAN_BLUBBER = ITEMS.register("leviathan_blubber",
-            () -> new Item(new Item.Properties().tab(CreativeTabs.TRS_TAB)));
-    public static final RegistryObject<Item> FLYING_SACK = ITEMS.register("flying_sack",
-            () -> new Item(new Item.Properties().tab(CreativeTabs.TRS_TAB)));
-     */
-
     public static void register() {}
 }

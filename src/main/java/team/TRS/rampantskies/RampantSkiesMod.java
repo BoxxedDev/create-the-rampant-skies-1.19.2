@@ -20,6 +20,8 @@ import team.TRS.rampantskies.block.TRSBlockEntities;
 import team.TRS.rampantskies.entity.TRSEntities;
 import team.TRS.rampantskies.entity.client.skyvenger.SkyvengerRenderer;
 import team.TRS.rampantskies.item.TRSItems;
+import team.TRS.rampantskies.ponder.TRSPonderIndex;
+import team.TRS.rampantskies.ponder.TRSPonderTags;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(RampantSkiesMod.MODID)
@@ -68,6 +70,9 @@ public class RampantSkiesMod {
             EntityRenderers.register(TRSEntities.SKYVENGER.get(), SkyvengerRenderer::new);
 
             TRSPartialModels.init();
+
+            TRSPonderTags.register();
+            TRSPonderIndex.register();
         }
     }
 

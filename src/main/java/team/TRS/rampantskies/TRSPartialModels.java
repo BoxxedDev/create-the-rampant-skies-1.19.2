@@ -6,8 +6,8 @@ import com.simibubi.create.Create;
 
 public class TRSPartialModels {
     public static final PartialModel
-    INTAKE_FAN = block("air_intake/fan")
-
+    INTAKE_FAN = block("air_intake/fan"),
+    EXHAUST = block("exhaust")
             ;
 
     private static PartialModel block(String path) {
