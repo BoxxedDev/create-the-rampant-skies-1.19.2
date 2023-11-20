@@ -8,11 +8,13 @@ import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRender
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
+import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleType;
@@ -22,6 +24,13 @@ import net.minecraft.world.level.block.Block;
 import org.apache.logging.log4j.core.util.SystemMillisClock;
 import team.TRS.rampantskies.TRSPartialModels;
 import team.TRS.rampantskies.block.entity.GasNozzleBlockEntity;
+import team.lodestar.lodestone.registry.common.particle.LodestoneParticleRegistry;
+import team.lodestar.lodestone.systems.particle.WorldParticleBuilder;
+import team.lodestar.lodestone.systems.particle.data.ColorParticleData;
+import team.lodestar.lodestone.systems.particle.data.GenericParticleData;
+import team.lodestar.lodestone.systems.particle.type.LodestoneParticleType;
+
+import java.awt.*;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 
@@ -32,34 +41,20 @@ public class GasNozzleBlockRenderer extends SafeBlockEntityRenderer<GasNozzleBlo
 
     @Override
     protected void renderSafe(GasNozzleBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource bufferSource, int light, int overlay) {
-        Direction direction = be.getBlockState().getValue(FACING);
+        Direction direction = be.getBlockState().getValue(FACING).getOpposite();
 
-        SuperByteBuffer exhaust = CachedBufferer.partialFacing(TRSPartialModels.EXHAUST, be.getBlockState(), direction.getOpposite());
-
-        VertexConsumer vb = bufferSource.getBuffer(RenderType.cutoutMipped());
-
-        int lightBack = LevelRenderer.getLightColor(be.getLevel(), be.getBlockPos().relative(direction.getOpposite()));
-
-
-
-        Vector3f particleVec = new Vector3f((float) (be.getBlockPos().getX() + 0.5), (float) (be.getBlockPos().getY() + 0.5), (float) (be.getBlockPos().getZ() + 0.5));
-
-        float particleAcc = 0.05F;
-
-            createExhaustFlame(exhaust, be, direction.getAxis(), (float) (be.getThrust() / (be.getThrust() * 1.1)), lightBack).renderInto(ms, vb);
-            //be.getLevel().addParticle(ParticleTypes.CLOUD, (double) particleVec.x(), (double) particleVec.y(), (double) particleVec.z(), (double) direction.getNormal().getX() * particleAcc, (double) direction.getNormal().getY() * particleAcc, (double) direction.getNormal().getZ() * particleAcc);
-            be.getLevel().addParticle(ParticleTypes.SMOKE, (double) particleVec.x(), (double) particleVec.y(), (double) particleVec.z(), (double) direction.getNormal().getX() * particleAcc, (double) direction.getNormal().getY() * particleAcc, (double) direction.getNormal().getZ() * particleAcc);
-    }
-
-    private SuperByteBuffer createExhaustFlame(SuperByteBuffer buffer, GasNozzleBlockEntity be, Direction.Axis axis, float size, int lightBack) {
-        Direction direction = be.getBlockState().getValue(FACING);
-        double translate = 1.5;
-
-        buffer.light(999999999);
-        buffer.translate(direction.getNormal().getX() / translate, direction.getNormal().getY() / translate, direction.getNormal().getZ() / translate);
-        buffer.scale(size);
-        buffer.rotateCentered(direction, AnimationTickHolder.getRenderTime(be.getLevel()) * 10);
-
-        return buffer;
+        BlockPos relativePos = be.getBlockPos().relative(direction);
+        Vector3f velocityVec = new Vector3f(((be.getBlockPos().getX() - relativePos.getX()) * (be.getThrust() / 512)),
+                ((be.getBlockPos().getY() - relativePos.getY()) * (be.getThrust() / 4096)),
+                ((be.getBlockPos().getZ() - relativePos.getZ()) * (be.getThrust() / 4096)));
+        if (be.getThrust() > 0) {
+            WorldParticleBuilder.create(LodestoneParticleRegistry.WISP_PARTICLE)
+                    .setScaleData(GenericParticleData.create(0.45f, 0).build())
+                    .setColorData(ColorParticleData.create(new Color(102,245,0), new Color(239, 252, 230)).build())
+                    .setMotion(velocityVec.x(), velocityVec.y(), velocityVec.z())
+                    .setLifetime((int) be.getThrust() / 32)
+                    .enableNoClip()
+                    .spawn(be.getLevel(), relativePos.getX() + 0.5, relativePos.getY() + 0.5, relativePos.getZ() + 0.5);
+        }
     }
 }
